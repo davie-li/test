@@ -1,1 +1,2 @@
 Hi git
+I am studying the git now!
