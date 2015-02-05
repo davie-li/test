@@ -45,9 +45,34 @@
 7. 删除文件
   
    先删除文件
-   git rm，放至暂存区
+   git rm，放至暂存区。git rm 的时候会自动调用系统的rm命令删除工作区的，并把改动（删除文件这个行为）放至暂存区。
    git commit
 
 8. 远程仓库，比如github
    
    在用户主目录下，看是否有.ssh目录，没有则  ssh-keygen -t rsa -C "youremail@example.com"
+
+9. 分支，当需要同步开发的时候，鼓励使用分支来并行处理，在分支里可以随时提交，不影响其他分支的开发。开发完毕后，合并到master
+  Git鼓励大量使用分支：
+  查看分支：git branch
+  创建分支：git branch <name>
+  删除分支：git branch -d <name>
+
+  切换分支：     git checkout <name>
+  创建+切换分支：git checkout -b <name>
+
+  合并某分支到当前分支：git merge <name>
+
+10. 分支策略
+  在实际开发中，我们应该按照几个基本原则进行分支管理：
+  首先，master分支应该是非常稳定的，也就是仅用来发布新版本，平时不能在上面干活；
+  那在哪干活呢？干活都在dev分支上，也就是说，dev分支是不稳定的，到某个时候，比如1.0版本发布时，再把dev分支合并到master上，在master分支发布1.0版本；  
+  你和你的小伙伴们每个人都在dev分支上干活，每个人都有自己的分支，时不时地往dev分支上合并就可以了。
+
+11. 更新和上传
+  查看远程库信息，使用git remote -v；
+  本地新建的分支如果不推送到远程，对其他人就是不可见的；
+  从本地推送分支，使用git push origin branch-name，如果推送失败，先用git pull抓取远程的新提交；
+  在本地创建和远程分支对应的分支，使用git checkout -b branch-name origin/branch-name，本地和远程分支的名称最好一致；
+  建立本地分支和远程分支的关联，使用git branch --set-upstream branch-name origin/branch-name；
+  从远程抓取分支，使用git pull，如果有冲突，要先处理冲突。
