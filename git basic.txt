@@ -1,25 +1,36 @@
 每次操作都要先到仓库所在目录下：
 
+
 1. 初始化一个Git仓库，使用git init命令。
+
+
 
 2. 提交修改和提交新文件到Git仓库，步骤是一样的，分两步：
 第一步，使用命令git add <file>，注意，可反复多次使用，添加多个文件；
 第二步，使用命令git commit -m，完成。
 每次修改，如果不add到暂存区，那就不会加入到commit中。
 
+
+
 3. 如果git status告诉你有文件被修改过，用git diff可以查看修改内容。
    git diff HEAD -- readme.txt，比较readme.txt的当前版本和服务器上最新版本的区别
    git diff 比较工作目录和库上最新的所有差别
+
+
 
 4. HEAD指向的版本就是当前版本，HEAD^上一个版本，HEAD^^上上一个版本。HEAD~100，100个之前的版本。
 因此，Git允许我们在版本的历史之间穿梭，使用命令git reset --hard commit_id。id可以用HEAD^^，或HEAD~100，或commit_id的前面缩写，只要唯一git就能找到
 穿梭前，用git log可以查看提交历史，以便确定要回退到哪个版本。
 要重返未来，用git reflog查看命令历史，以便确定要回到未来的哪个版本。
 
+
+
 5. Git和其他版本控制系统如SVN的一个不同之处就是有暂存区的概念。
   工作区：就是我们直接操作的目录和文件
   版本库：.git隐藏目录，是版本库（repository）。包括 暂存区（叫stage或index）、默认分支master和指向默认分支的HEAD
   git add就是把工作区的改动放到暂存区，git commit就是把暂存区的所有内容提交到当前分支
+
+
 
 6. 撤销文件的修改
   git checkout -- file命令中的--很重要，没有--，就变成了“创建一个新分支”的命令。有-- file.name就是撤销file.name的修改，使其回退。
@@ -29,5 +40,14 @@
 
   git checkout其实是用版本库里的版本替换工作区的版本，无论工作区是修改还是删除，都可以“一键还原”。
 
+
+
 7. 删除文件
   
+   先删除文件
+   git rm，放至暂存区
+   git commit
+
+8. 远程仓库，比如github
+   
+   在用户主目录下，看是否有.ssh目录，没有则  ssh-keygen -t rsa -C "youremail@example.com"
